@@ -1,0 +1,45 @@
+<section style="background-color: #eee;">
+  <div class="text-center container py-5">
+    <h4 class="mt-4 mb-5"><strong>Bestsellers</strong></h4>
+
+    <div class="column" style="display: flex;">
+      {{#each courses}}
+      <a methol = "GET" href = "/courses/{{this.slug}}">
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card">
+          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+            data-mdb-ripple-color="light">
+            <img src={{this.image}}
+              class="w-100" />
+            <a href="#!">
+              <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h5><span class="badge bg-primary ms-2">{{this.name}}</span></h5>
+                </div>
+              </div>
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a href="" class="text-reset">
+              <h5 class="card-title mb-3">{{this.description}}</h5>
+            </a>
+            <a methol = "GET" href="/courses/{{this._id}}/edit" class="text-reset">
+              <p>Update</p>
+            </a>
+            <h6 class="mb-3">$61.99</h6>
+          </div>
+        </div>
+      </div>
+
+      </a>       
+      {{/each}}
+      
+    </div>
+    
+
+
+  </div>
+</section>

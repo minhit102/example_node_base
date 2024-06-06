@@ -1,0 +1,76 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên Khóa học</th>
+      <th scope="col">Descripts</th>
+      <th scope="col">Trình độ</th>
+      <th scope="col">Tùy Chỉnh</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each courses}}
+      <tr>
+          <th scope="row">{{sum @index 1}} </th>
+          <td>{{this.name}}</td>
+          <td>{{this.description}}</td>
+          <td>{{this.createdAt}}</td>
+          <td>
+            <a href = "/courses/{{this._id}}/edit" method = "GET" class="btn btn-link" >Sửa</a>
+            <a  class="btn btn-link" data-toggle="modal"  data-target="#exampleModal" data-id = {{this._id}}>Xóa</a>
+          </td>
+      </tr>     
+      {{/each}}
+
+  
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Xác nhận bạn muốn xóa khóa học này
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id = "confirmDelete">Xóa</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<form method ="POST"  id ="deleteForm" >
+</form>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded' , function(event){
+  var id_couser;
+  $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  id_couser = button.data('id') 
+  console.log(id_couser)
+});
+  var formDele = document.getElementById('deleteForm');
+  var confirmDele = document.getElementById('confirmDelete');
+
+  confirmDele.onclick = function(){
+    formDele.action = "/courses/" + id_couser + "/delete?_method=DELETE";
+    formDele.submit();
+
+  }
+})
+  
+
+</script>
+
